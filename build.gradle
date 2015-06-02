@@ -32,14 +32,13 @@ repositories {
 
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-actuator")
     compile("org.springframework.boot:spring-boot-starter-security")
-    //compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.0.7.RELEASE'
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.security.oauth:spring-security-oauth2:2.0.7.RELEASE")
-    //compile group: 'com.google.guava', name: 'guava', version: '12.0'
+    compile("org.springframework.security:spring-security-jwt")
     compile("com.google.guava:guava:12.0")
+    //compile("org.springframework.boot:spring-boot-actuator")
     runtime("org.postgresql:postgresql:9.4-1201-jdbc41")
     testCompile("org.springframework.boot:spring-boot-starter-test") 
 }

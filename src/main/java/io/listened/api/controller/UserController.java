@@ -5,6 +5,7 @@ import io.listened.api.repo.UserRepository;
 import io.listened.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,9 +34,22 @@ public class UserController {
         return user;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public Collection<User> list() {
         return repo.findAll();
+    }
+
+
+    @RequestMapping(value = "hello", method = RequestMethod.GET)
+    public String hello() {
+        return "hello world";
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "authed", method = RequestMethod.GET)
+    public String authed() {
+        return "hello, authenticated";
     }
 
 }

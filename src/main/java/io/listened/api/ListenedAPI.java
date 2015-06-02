@@ -32,7 +32,6 @@ public class ListenedAPI {
             @Override
             public void run(String... args) throws Exception {
 
-
                 Collection<Role> roles = Arrays.asList(
                         new Role("ROLE_SUPER_ADMIN", "Highest available role"),
                         new Role("ROLE_ADMIN", "Administrator role"),
@@ -60,6 +59,10 @@ public class ListenedAPI {
                     Iterable<Role> roles = roleRepo.findAll();
                     user.setRoles(Sets.newHashSet(roles));
                     userRepo.save(user);
+                    User user2 = userService.createUser("test@pfd.net", "testpassword");
+                    Role r = roleRepo.findOne("ROLE_USER");
+                    user2.setRoles(Sets.newHashSet(Arrays.asList(r)));
+                    userRepo.save(user2);
                 }
             }
 

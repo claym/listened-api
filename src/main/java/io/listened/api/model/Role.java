@@ -1,5 +1,7 @@
 package io.listened.api.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ROLE")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @Column(name = "name", unique = true, nullable = false)
@@ -46,5 +48,10 @@ public class Role {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }
