@@ -3,6 +3,7 @@ package io.listened.api.configuration;
 import io.listened.api.service.SecurityDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -64,6 +65,15 @@ public class OAuth2ServerConfiguration {
         @Autowired
         private SecurityDetailsService securityDetailsService;
 
+        @Value("${token.keypass}")
+        String tokenKeypass;
+
+        @Value("${token.storepass}")
+        String tokenStorepass;
+
+        @Value("${token.alias}")
+        String tokenAlias;
+
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints)
                 throws Exception {
@@ -89,8 +99,8 @@ public class OAuth2ServerConfiguration {
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
             KeyPair keyPair = new KeyStoreKeyFactory(
-                    new ClassPathResource("server.jks"), "letmein".toCharArray())
-                    .getKeyPair("mytestkey", "changeme".toCharArray());
+                    new ClassPathResource("server.jks"), tokenStorepass.toCharArray())
+                    .getKeyPair(tokenAlias, tokenKeypass.toCharArray());
             converter.setKeyPair(keyPair);
             return converter;
         }
