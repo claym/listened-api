@@ -65,14 +65,11 @@ public class OAuth2ServerConfiguration {
         @Autowired
         private SecurityDetailsService securityDetailsService;
 
-        @Value("${token.keypass}")
-        String tokenKeypass;
+        @Value("${token.key.signing}")
+        String tokenKeySigning;
 
-        @Value("${token.storepass}")
-        String tokenStorepass;
-
-        @Value("${token.alias}")
-        String tokenAlias;
+        @Value("${token.key.verifier}")
+        String tokenKeyVerifier;
 
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints)
@@ -98,10 +95,8 @@ public class OAuth2ServerConfiguration {
         @Bean
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-            KeyPair keyPair = new KeyStoreKeyFactory(
-                    new ClassPathResource("server.jks"), tokenStorepass.toCharArray())
-                    .getKeyPair(tokenAlias, tokenKeypass.toCharArray());
-            converter.setKeyPair(keyPair);
+            converter.setSigningKey(tokenKeySigning);
+            converter.setVerifierKey(tokenKeyVerifier);
             return converter;
         }
 
