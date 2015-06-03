@@ -1,12 +1,10 @@
 package io.listened.api.configuration;
 
-import io.listened.api.service.SecurityDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,9 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
-
-import java.security.KeyPair;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -58,25 +54,21 @@ public class OAuth2ServerConfiguration {
     protected static class AuthorizationServerConfiguration extends
             AuthorizationServerConfigurerAdapter {
 
+        @Value("${token.key.signing}")
+        String tokenKeySigning;
+
         @Autowired
         @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
 
-        @Autowired
-        private SecurityDetailsService securityDetailsService;
-
-        @Value("${token.key.signing}")
-        String tokenKeySigning;
-
-        @Value("${token.key.verifier}")
-        String tokenKeyVerifier;
-
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints)
                 throws Exception {
-            endpoints.authenticationManager(authenticationManager).accessTokenConverter(
-                    jwtAccessTokenConverter());
+            endpoints
+                    .authenticationManager(this.authenticationManager)
+                    .accessTokenConverter(jwtAccessTokenConverter());
         }
+
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -96,11 +88,14 @@ public class OAuth2ServerConfiguration {
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
             converter.setSigningKey(tokenKeySigning);
-            converter.setVerifierKey(tokenKeyVerifier);
             return converter;
         }
 
-
+        @Bean
+        public JwtTokenStore tokenStore() {
+            JwtTokenStore store = new JwtTokenStore(jwtAccessTokenConverter());
+            return store;
+        }
     }
 
 }
