@@ -22,6 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot' 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven-publish'
 
 group = 'io.listened'
 version = '1.0'
@@ -80,4 +81,16 @@ stage.mustRunAfter(clean)
 
 clean << {
     project.file("${project.buildDir}/${jar.baseName}.jar").delete()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'io.listened'
+            artifactId 'listened-api'
+            version '1.0'
+
+            from components.java
+        }
+    }
 }
