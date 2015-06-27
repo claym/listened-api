@@ -1,6 +1,6 @@
 package io.listened.api.repo;
 
-import io.listened.api.model.Role;
+import io.listened.common.model.Role;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

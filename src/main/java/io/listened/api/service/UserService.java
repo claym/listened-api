@@ -1,7 +1,7 @@
 package io.listened.api.service;
 
 import io.listened.api.exception.EmailExistsException;
-import io.listened.api.model.User;
+import io.listened.common.model.User;
 import io.listened.api.repo.RoleRepository;
 import io.listened.api.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

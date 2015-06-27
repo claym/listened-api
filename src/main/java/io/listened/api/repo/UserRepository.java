@@ -1,6 +1,6 @@
 package io.listened.api.repo;
 
-import io.listened.api.model.User;
+import io.listened.common.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

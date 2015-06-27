@@ -1,6 +1,6 @@
 package io.listened.api.controller;
 
-import io.listened.api.model.User;
+import io.listened.common.model.User;
 import io.listened.api.repo.UserRepository;
 import io.listened.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

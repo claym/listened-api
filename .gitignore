@@ -76,3 +76,4 @@ crashlytics-build.properties
 .env
 src/main/resources/server.jks
 src/main/resources/server.cer
+.idea/gradle.xml

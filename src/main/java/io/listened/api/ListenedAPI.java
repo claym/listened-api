@@ -1,15 +1,15 @@
 package io.listened.api;
 
 import com.google.common.collect.Sets;
-import io.listened.api.model.Role;
-import io.listened.api.model.User;
 import io.listened.api.repo.RoleRepository;
 import io.listened.api.repo.UserRepository;
 import io.listened.api.service.UserService;
-import org.springframework.beans.factory.annotation.Value;
+import io.listened.common.model.Role;
+import io.listened.common.model.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 
@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SpringBootApplication
+@EntityScan(value = "io.listened.common.model")
 public class ListenedAPI {
 
 
