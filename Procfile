@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar build/listenedapi.jar
+web: java -Dserver.port=$PORT -jar build/listened-api.jar
