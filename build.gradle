@@ -32,8 +32,8 @@ jar {
     version = '1.0'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+//def final sourceCompatibility = 1.8
+//def final targetCompatibility = 1.8
 
 repositories {
     mavenLocal()
@@ -55,7 +55,8 @@ dependencies {
     compile("org.springframework.social:spring-social-twitter")
     compile("com.google.guava:guava:12.0")
     //compile("org.springframework.boot:spring-boot-actuator")
-    compile("com.github.claym:listened-common:7a524495a6")
+
+    compile("com.github.claym:listened-common:e6a819d18e")
 
     runtime("org.postgresql:postgresql:9.4-1201-jdbc41")
     testCompile("org.springframework.boot:spring-boot-starter-test") 
