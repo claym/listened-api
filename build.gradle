@@ -27,6 +27,10 @@ apply plugin: 'maven-publish'
 group = 'io.listened'
 version = '1.0'
 
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 60, 'seconds'
+}
+
 jar {
     baseName = 'listened-api'
     version = '1.0'
@@ -56,7 +60,9 @@ dependencies {
     compile("com.google.guava:guava:12.0")
     //compile("org.springframework.boot:spring-boot-actuator")
 
-    compile("com.github.claym:listened-common:e6a819d18e")
+    compile("com.github.claym:listened-common:-SNAPSHOT") { changing = true }
+
+    //compile group: "com.github.claym", name: "listened-common", version: "-SNAPSHOT", changing: true
 
     runtime("org.postgresql:postgresql:9.4-1201-jdbc41")
     testCompile("org.springframework.boot:spring-boot-starter-test") 
