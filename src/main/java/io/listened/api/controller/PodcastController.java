@@ -4,12 +4,11 @@ import io.listened.api.exception.FeedExistsException;
 import io.listened.api.exception.PodcastNotFoundException;
 import io.listened.api.repo.PodcastRepository;
 import io.listened.api.service.PodcastService;
-import io.listened.common.model.Podcast;
+import io.listened.common.model.podcast.Podcast;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,10 +46,10 @@ public class PodcastController {
         return podcast;
     }
 
-    @RequestMapping(value="/{podcastId}/ping", method=RequestMethod.GET)
+    @RequestMapping(value = "/{podcastId}/ping", method = RequestMethod.GET)
     private String ping(@PathVariable Long podcastId) {
         Podcast podcast = podcastRepository.findOne(podcastId);
-        if(podcast == null) {
+        if (podcast == null) {
             throw new PodcastNotFoundException(podcastId);
         }
         return null;
@@ -61,7 +60,7 @@ public class PodcastController {
         log.info("Got podcast: {}", podcastId);
         log.debug(updatedPodcast.toString());
         Podcast podcast = podcastRepository.findOne(podcastId);
-        if(podcast == null) {
+        if (podcast == null) {
             throw new PodcastNotFoundException(podcastId);
         }
         podcast = podcastRepository.save(updatedPodcast);

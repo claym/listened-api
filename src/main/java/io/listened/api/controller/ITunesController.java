@@ -27,7 +27,7 @@ public class ITunesController {
     @Autowired
     GenreRepository genreRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/all", method = RequestMethod.GET)
     private List<Genre> findAllGenre() {
         return Lists.newArrayList(genreRepository.findAll());
     }
@@ -35,6 +35,14 @@ public class ITunesController {
     @RequestMapping(value = "/{genreId}", method = RequestMethod.GET)
     private Genre getGenre(@PathVariable Long genreId) {
         return genreRepository.findOne(genreId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    private List<Genre> search(@RequestParam("name") String name) {
+        if(name != null) {
+            return genreRepository.findByNameLikeIgnoreCase("%"+name+"%");
+        }
+        return null;
     }
 
     @RequestMapping(method = RequestMethod.POST)

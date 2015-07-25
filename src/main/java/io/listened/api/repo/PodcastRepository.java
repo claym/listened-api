@@ -1,6 +1,6 @@
 package io.listened.api.repo;
 
-import io.listened.common.model.Podcast;
+import io.listened.common.model.podcast.Podcast;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

@@ -1,9 +1,9 @@
 package io.listened.api.service;
 
 import io.listened.api.exception.FeedExistsException;
-import io.listened.common.model.Podcast;
 import io.listened.api.repo.PodcastRepository;
 import io.listened.common.constants.JobQueues;
+import io.listened.common.model.podcast.Podcast;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
