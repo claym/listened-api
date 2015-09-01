@@ -18,8 +18,8 @@ import java.io.IOException;
  * Created by Clay on 6/21/2015.
  * REST Controller for handling retrieval, submission and updates of podcasts
  */
-@RestController
-@RequestMapping("/podcast")
+
+//@RequestMapping("/podcast")
 public class PodcastController {
 
     private static final Logger log = LoggerFactory.getLogger(PodcastController.class);

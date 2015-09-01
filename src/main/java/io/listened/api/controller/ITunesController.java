@@ -15,8 +15,8 @@ import java.util.List;
  * Created by Clay on 6/28/2015.
  * Handles loading, saving, retrieving itunes genres
  */
-@RestController
-@RequestMapping(value = "/genre")
+//@RestController
+//@RequestMapping(value = "/genre")
 public class ITunesController {
 
     private static final Logger log = LoggerFactory.getLogger(ITunesController.class);
@@ -40,7 +40,7 @@ public class ITunesController {
     @RequestMapping(method = RequestMethod.GET)
     private List<Genre> search(@RequestParam("name") String name) {
         if(name != null) {
-            return genreRepository.findByNameLikeIgnoreCase("%"+name+"%");
+            //return genreRepository.findByName("%"+name+"%");
         }
         return null;
     }
