@@ -30,4 +30,16 @@ public class PodcastService {
         rabbitTemplate.convertAndSend(JobQueues.JOB_PODCAST_ADD, podcast.getId());
         return podcast;
     }
+
+    public void updatePodcast(Long podcastId, boolean fullUpdate) {
+        if(fullUpdate) {
+            rabbitTemplate.convertAndSend(JobQueues.JOB_PODCAST_REFRESH, podcastId);
+        } else {
+            rabbitTemplate.convertAndSend(JobQueues.JOB_PODCAST_UPDATE, podcastId);
+        }
+    }
+
+    public Podcast getPodcast(Long podcastId) {
+        return podcastRepository.findOne(podcastId);
+    }
 }

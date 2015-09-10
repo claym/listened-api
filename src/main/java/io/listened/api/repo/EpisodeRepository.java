@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(itemResourceRel = "episode", collectionResourceRel = "episode", path="episode")
 public interface EpisodeRepository  extends CrudRepository<Episode, Long> {
 
-    @Query("select e from episode e where e.podcast.id = :podcastId and e.guid = :guid")
+    @Query("select e from Episode e where e.podcast.id = :podcastId and e.guid = :guid")
     public Episode findByGuid(@Param("podcastId") Long podcastId, @Param("guid") String guid);
 
 }
