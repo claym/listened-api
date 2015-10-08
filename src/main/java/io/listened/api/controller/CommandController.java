@@ -26,7 +26,7 @@ public class CommandController {
         iTunesService.sendGenreLoadMessage();
     }
 
-    @RequestMapping(value = "/podcast/fullUpdate/{podcastId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/podcast/refresh/{podcastId}", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     private void podcastFullUpdate(@PathVariable Long podcastId) {
         Podcast podcast = podcastService.getPodcast(podcastId);
